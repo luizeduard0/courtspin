@@ -1,4 +1,4 @@
-export const PROTECTED_ROUTES = [];
+export const PROTECTED_ROUTES = ['/schedule'];
 export const MODALITY = {
   SINGLES: {
     key: "singles",
