@@ -6,6 +6,7 @@ import { PROTECTED_ROUTES } from "@/utils/constants";
 import { useEffect } from "react";
 import '@/styles/globals.scss'
 import Header from "@/components/common/header";
+import Nav from "@/components/common/nav";
 
 export default function App({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);
@@ -31,6 +32,7 @@ export default function App({ Component, ...rest }: AppProps) {
     <Provider store={store}>
       <Header />
       <Component {...pageProps} />
+      <Nav />
     </Provider>
   );
 }

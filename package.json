@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.0.13",
     "@reduxjs/toolkit": "^1.9.7",
     "next": "13.5.4",
     "next-redux-wrapper": "^8.1.0",
