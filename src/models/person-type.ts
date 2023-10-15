@@ -1,4 +1,1 @@
-export interface PersonType {
-  id: string
-  name: string
-}
+export declare type PersonType = 'COACH' | 'PROFESSOR'| 'PLAYER' | 'VIEWER' | 'CHAIR_UMPIRE' | 'LINE_UMPIRE'

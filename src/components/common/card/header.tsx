@@ -1,5 +1,4 @@
-import { CardHeaderProps } from "@/types/props-types/card";
-import { ReactNode } from "react";
+import { CardHeaderProps } from "@/types/props-types/card.type";
 
 export default function CardHeader({ children, ...card }: CardHeaderProps) {
 

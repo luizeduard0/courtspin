@@ -1,6 +1,5 @@
 import Avatar from "@/components/common/avatar"
 import { Card } from "@/components/common/card"
-import { MODALITY } from "@/utils/constants"
 
 export default function InboxPage() {
 
