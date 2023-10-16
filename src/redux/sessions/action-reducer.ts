@@ -8,7 +8,7 @@ const initialState = {
   error: null,
   draft: {},
   sessions: [],
-  selectedSession: {}
+  selectedSession: {},
 } as InitialSessionState;
 
 const sessionSlice = createSlice({
@@ -20,56 +20,99 @@ const sessionSlice = createSlice({
         ...state,
         selectedSession: undefined,
         error: null,
-        isLoading: true
-      }
+        isLoading: true,
+      };
     },
-    loadSessionSuccess: (state, { payload: session }: PayloadAction<Session>) => {
+    loadSessionSuccess: (
+      state,
+      { payload: session }: PayloadAction<Session>
+    ) => {
       return {
         ...state,
         selectedSession: session,
         error: null,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     },
     loadSessionError: (state, { payload: error }: PayloadAction<any>) => {
       return {
         ...state,
         selectedSession: undefined,
         error: error,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     },
-    updateSessionDraftState: (state, { payload: session }: PayloadAction<InitialWizardState>) => {
+    updateSessionDraftState: (
+      state,
+      { payload: session }: PayloadAction<InitialWizardState>
+    ) => {
       return {
         ...state,
         draft: session,
         error: null,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     },
-    requestSession: (state, {payload: session}: PayloadAction<InitialWizardState>) => {
+    requestSession: (
+      state,
+      { payload: session }: PayloadAction<InitialWizardState>
+    ) => {
       return {
         ...state,
         draft: session,
         isLoading: true,
-        error: null
-      }
+        error: null,
+      };
     },
-    requestSessionSuccess: (state, {payload: session}: PayloadAction<Session>) => {
+    requestSessionSuccess: (
+      state,
+      { payload: session }: PayloadAction<Session>
+    ) => {
       return {
         ...state,
         draft: {},
         selectedSession: session,
         isLoading: false,
-        error: null
-      }
+        error: null,
+      };
     },
-    requestSessionError: (state, {payload: error}: PayloadAction<any>) => {
+    requestSessionError: (state, { payload: error }: PayloadAction<any>) => {
       return {
         ...state,
         isLoading: false,
-        error
-      }
+        error,
+      };
+    },
+    requestJoinSession: (
+      state,
+      { payload: sessionId }: PayloadAction<string>
+    ) => {
+      return {
+        ...state,
+        isLoading: true,
+        error: undefined,
+      };
+    },
+    requestJoinSessionSuccess: (
+      state,
+      { payload: session }: PayloadAction<Session>
+    ) => {
+      return {
+        ...state,
+        selectedSession: session,
+        isLoading: false,
+        error: undefined,
+      };
+    },
+    requestJoinSessionError: (
+      state,
+      { payload: error }: PayloadAction<any>
+    ) => {
+      return {
+        ...state,
+        isLoading: false,
+        error,
+      };
     },
   },
 });
@@ -81,7 +124,10 @@ export const {
   updateSessionDraftState,
   requestSession,
   requestSessionSuccess,
-  requestSessionError
-} = sessionSlice.actions
+  requestSessionError,
+  requestJoinSession,
+  requestJoinSessionSuccess,
+  requestJoinSessionError,
+} = sessionSlice.actions;
 
-export default sessionSlice.reducer
+export default sessionSlice.reducer;

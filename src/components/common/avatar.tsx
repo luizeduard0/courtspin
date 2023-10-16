@@ -18,5 +18,9 @@ export default function Avatar({ avatar = undefined, w = 8, h = 8, className='ro
     )
   }
 
-  return <UserCircle width={w} height={h} className='text-gray-500' />
+  return (
+    <div className={className}>
+      <UserCircle width={w} height={h} className='text-gray-300' />
+    </div>
+  )
 }

@@ -1,15 +1,17 @@
 import { MODALITY, PLAYER_TYPE, STATUS, TYPE } from "@/utils/constants";
 
+export interface SessionUserProp {
+  id: number;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
+  ntrp: string;
+}
+
 export interface SessionUser {
   isWinner: boolean;
   userType: PLAYER_TYPE;
-  user: {
-    id: number;
-    firstName: string;
-    lastName: string;
-    avatar?: string;
-    ntrp: string;
-  };
+  user: SessionUserProp;
 }
 
 export interface Session {
