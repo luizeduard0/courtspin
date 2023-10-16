@@ -29,7 +29,7 @@ export default function Nav() {
   ]
 
   return (
-    <nav className='fixed bottom-0 flex gap-2 justify-between border-t border-slate-300 w-full pt-2 px-2 pb-6 z-50'>
+    <nav className='fixed bottom-0 flex gap-2 justify-between bg-white border-t border-slate-300 w-full pt-2 px-2 pb-6 z-50'>
       {menu.map(nav => (
         <Link 
           key={nav.url} 

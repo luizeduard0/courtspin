@@ -1,9 +1,22 @@
-export default function Avatar({ w = 8, h = 8 }) {
-  return (
-    <span className={`inline-block h-${h} w-${w} overflow-hidden rounded-full bg-gray-100`}>
-      <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-    </span>
-  )
+import { UserCircle } from "@phosphor-icons/react"
+import Image from "next/image"
+
+export default function Avatar({ avatar = undefined, w = 8, h = 8 }: { avatar?: string | undefined, w?: number, h?: number }) {
+  if (avatar) {
+    return (
+      <Image
+        src={avatar}
+        width={w}
+        height={h}
+        className='rounded-full'
+        style={{
+          width: `${w}px`,
+          height: `${h}px`,
+        }}
+        alt='avatar'
+      />
+    )
+  }
+
+  return <UserCircle width={w} height={h} className='text-gray-500' />
 }
