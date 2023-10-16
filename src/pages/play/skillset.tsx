@@ -11,7 +11,14 @@ export default function SkillsetStep({ wizardState, onChange, onPrev, onNext }: 
           description='Just getting started'
           name='ntrp'
           value='2.5'
-          onChange={onChange}
+          onChange={(value: {}) => {
+            onChange({
+              info: {
+                ...wizardState.info,
+                ...value
+              }
+            })
+          }}
         />
       </div>
       <div className='flex gap-2 h-full'>
@@ -21,7 +28,14 @@ export default function SkillsetStep({ wizardState, onChange, onPrev, onNext }: 
           description='Advanced Beginner'
           name='ntrp'
           value='3.0'
-          onChange={onChange}
+          onChange={(value: {}) => {
+            onChange({
+              info: {
+                ...wizardState.info,
+                ...value
+              }
+            })
+          }}
         />
         <Block
           state={wizardState}
@@ -29,7 +43,14 @@ export default function SkillsetStep({ wizardState, onChange, onPrev, onNext }: 
           description='Intermediate Beginner'
           name='ntrp'
           value='3.5'
-          onChange={onChange}
+          onChange={(value: {}) => {
+            onChange({
+              info: {
+                ...wizardState.info,
+                ...value
+              }
+            })
+          }}
         />
       </div>
       <div className='flex gap-2 h-full'>
@@ -39,7 +60,14 @@ export default function SkillsetStep({ wizardState, onChange, onPrev, onNext }: 
           description='Advanced Intermediate'
           name='ntrp'
           value='4.0'
-          onChange={onChange}
+          onChange={(value: {}) => {
+            onChange({
+              info: {
+                ...wizardState.info,
+                ...value
+              }
+            })
+          }}
         />
         <Block
           state={wizardState}
@@ -47,7 +75,14 @@ export default function SkillsetStep({ wizardState, onChange, onPrev, onNext }: 
           description='Advanced Player'
           name='ntrp'
           value='4.5'
-          onChange={onChange}
+          onChange={(value: {}) => {
+            onChange({
+              info: {
+                ...wizardState.info,
+                ...value
+              }
+            })
+          }}
         />
       </div>
       <div className='flex gap-2 h-full'>
@@ -57,7 +92,14 @@ export default function SkillsetStep({ wizardState, onChange, onPrev, onNext }: 
           description='Expert'
           name='ntrp'
           value='5.0'
-          onChange={onChange}
+          onChange={(value: {}) => {
+            onChange({
+              info: {
+                ...wizardState.info,
+                ...value
+              }
+            })
+          }}
         />
       </div>
       <div className='flex gap-2 mt-2 pt-2 border-t border-gray-200'>

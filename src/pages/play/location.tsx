@@ -17,12 +17,8 @@ export default function LocationStep({ wizardState, onChange, onPrev, onNext }: 
           onPlaceSelected={(result) => {
             if (!result) return
             const city = result.address_components.find((ac: any) => ac.types.includes('locality'))
-            console.log(city)
             onChange({
-              info: {
-                ...wizardState.info,
-                location: city.long_name
-              }
+              location: city.long_name
             })
           }}
           className='border border-gray-400 px-2 py-3 rounded'

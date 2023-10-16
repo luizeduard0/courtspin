@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 import { HYDRATE } from "next-redux-wrapper";
 import auth from "./auth/action-reducer";
+import sessions from "./sessions/action-reducer";
 
 const combinedReducer = combineReducers({
-  auth
+  auth,
+  sessions
 });
 
 const reducers = (state: any, action: any) => {

@@ -5,11 +5,15 @@ import SkillsetStep from "./skillset"
 import ModalityStep from "./modality"
 import LocationStep from "./location"
 import InfoStep from "./info"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { requestRegister } from "@/redux/auth/action-reducer"
 import GenderStep from "./gender"
+import { StateType } from "@/types/state.type"
+import { requestSession, updateSessionDraftState } from "@/redux/sessions/action-reducer"
+import PeriodStep from "./period"
+import { useRouter } from "next/router"
 
-const steps = ['searching-for', 'gender', 'modality', 'skillset', 'location', 'info']
+const steps = ['searching-for', 'modality', 'location', 'period', 'saving']
 
 const initialWizardState: InitialWizardState = {
   step: 'searching-for',
@@ -29,27 +33,53 @@ const initialWizardState: InitialWizardState = {
 }
 
 export default function PlayPage() {
+  const router = useRouter()
   const dispatch = useDispatch()
   const [wizard, setWizard] = useState(initialWizardState)
+  const { user } = useSelector((state: StateType) => state.auth)
+  const { isLoading, selectedSession } = useSelector((state: StateType) => state.sessions)
 
   useEffect(() => {
+    const currentIndex = steps.findIndex((step) => step === wizard.step)
+    console.log(steps[currentIndex])
+    if(steps[currentIndex] === 'saving') {
+      dispatch(requestSession(wizard))
+      return
+    }
+  }, [wizard.step])
 
-  }, [])
+  useEffect(() => {
+    if(!selectedSession?.id) return
+    router.push(`/sessions/${selectedSession.id}`)
+  }, [selectedSession, router])
 
-  const handleChange = (state: {}) => {
+  const handleChange = (state: {}, shouldHandleNext: boolean = true) => {
     setWizard(prev => ({
       ...prev,
       ...state
     }))
-    handleNext()
+    if (shouldHandleNext) {
+      handleNext()
+    }
   }
 
   const handleNext = () => {
     const currentIndex = steps.findIndex((step) => step === wizard.step)
     const nextIndex = currentIndex + 1
     const len = steps.length
-
-    if (nextIndex < len) {
+    
+    if (nextIndex === len) {
+      /**
+       * If Guest, show the signup form
+       */
+      if (!user?.id && steps[currentIndex] !== 'info' && steps[nextIndex] === undefined) {
+        steps.push('skillset', 'gender', 'info')
+        dispatch(updateSessionDraftState(wizard))
+        handleNext()
+        return
+      }
+    } else if (nextIndex < len) {
+      dispatch(updateSessionDraftState(wizard))
       setWizard(prev => ({
         ...prev,
         step: steps[nextIndex]
@@ -72,6 +102,7 @@ export default function PlayPage() {
   const handleCreateAccount = () => {
     dispatch(requestRegister(wizard.info))
   }
+
 
   return (
     <div className='flex flex-col gap-2 p-2' style={{ height: "calc(100vh - 138px)" }}>
@@ -110,12 +141,12 @@ export default function PlayPage() {
         />
       )}
 
-      {wizard.step === 'info' && (
-        <InfoStep
+      {wizard.step === 'period' && (
+        <PeriodStep
           wizardState={wizard}
           onChange={handleChange}
           onPrev={handlePrev}
-          onNext={handleCreateAccount}
+          onNext={handleNext}
         />
       )}
 
@@ -124,9 +155,24 @@ export default function PlayPage() {
           wizardState={wizard}
           onChange={handleChange}
           onPrev={handlePrev}
+          onNext={handleNext}
+        />
+      )}
+
+      {wizard.step === 'info' && (
+        <InfoStep
+          wizardState={wizard}
+          onChange={(state) => handleChange(state, false)}
+          onPrev={handlePrev}
           onNext={handleCreateAccount}
         />
       )}
+
+      {wizard.step === 'saving' && (
+        <p>Saving session...</p>
+      )}
+
+
     </div>
   )
 }
