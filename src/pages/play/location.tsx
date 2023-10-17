@@ -10,18 +10,27 @@ export default function LocationStep({ wizardState, onChange, onPrev, onNext }: 
     <>
       <div
         className='flex flex-col h-full p-4 bg-gray-100 w-full border justify-center items-center rounded'
+        style={{ backgroundImage: `url('static/imgs/court1.jpg')`, backgroundSize: 'cover' }}
       >
-        <h3 className='text-xl text-black'>Location</h3>
+        <h3
+          className={`
+          text-xl mb-1
+          bg-black/90 text-white rounded-full p-5 py-1 border-2 border-white/70
+        `}
+        >
+          Location
+        </h3>
         <ReactGoogleAutocomplete
           apiKey={googleApiKey}
           onPlaceSelected={(result) => {
             if (!result) return
             const city = result.address_components.find((ac: any) => ac.types.includes('locality'))
+            setPlace(city)
             onChange({
               location: city.long_name
             })
           }}
-          className='border border-gray-400 px-2 py-3 rounded'
+          className='bg-white/80 border border-black px-8 py-3 rounded-full shadow-xl focus:ring-blue-600'
           style={{ width: '100%' }}
         />
       </div>
@@ -40,9 +49,9 @@ export default function LocationStep({ wizardState, onChange, onPrev, onNext }: 
           className={`
           w-full
           text-white px-1 py-2 rounded
-          ${wizardState.type !== undefined ? 'bg-blue-700' : 'bg-gray-300'}
+          ${place ? 'bg-blue-700' : 'bg-gray-300'}
         `}
-          disabled={wizardState.type == undefined}
+          disabled={!place}
         >
           Next
         </button>

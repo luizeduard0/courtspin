@@ -12,6 +12,7 @@ import { StateType } from "@/types/state.type"
 import { requestSession, updateSessionDraftState } from "@/redux/sessions/action-reducer"
 import PeriodStep from "./period"
 import { useRouter } from "next/router"
+import { Spinner } from "@phosphor-icons/react"
 
 const steps = ['searching-for', 'modality', 'location', 'period', 'saving']
 
@@ -41,15 +42,14 @@ export default function PlayPage() {
 
   useEffect(() => {
     const currentIndex = steps.findIndex((step) => step === wizard.step)
-    console.log(steps[currentIndex])
-    if(steps[currentIndex] === 'saving') {
+    if (steps[currentIndex] === 'saving') {
       dispatch(requestSession(wizard))
       return
     }
   }, [wizard.step])
 
   useEffect(() => {
-    if(!selectedSession?.id) return
+    if (!selectedSession?.id) return
     router.push(`/sessions/${selectedSession.id}`)
   }, [selectedSession, router])
 
@@ -67,7 +67,7 @@ export default function PlayPage() {
     const currentIndex = steps.findIndex((step) => step === wizard.step)
     const nextIndex = currentIndex + 1
     const len = steps.length
-    
+
     if (nextIndex === len) {
       /**
        * If Guest, show the signup form
@@ -105,7 +105,7 @@ export default function PlayPage() {
 
 
   return (
-    <div className='flex flex-col gap-2 p-2' style={{ height: "calc(100vh - 138px)" }}>
+    <div className='flex flex-col gap-2 p-2 bg-white' style={{ height: "calc(100vh - 138px)" }}>
       {wizard.step === 'searching-for' && (
         <SearchingForStep
           wizardState={wizard}
@@ -169,7 +169,21 @@ export default function PlayPage() {
       )}
 
       {wizard.step === 'saving' && (
-        <p>Saving session...</p>
+        <div
+          className='h-full bg-black rounded'
+          style={{ backgroundImage: `url('static/imgs/filip.jpg')`, backgroundSize: 'cover' }}
+        >
+          <h3
+            className={`
+              flex flex-col justify-center items-center
+              text-2xl text-white mt-4 text-center
+            `}
+          >
+            <Spinner className='animate-spin' />
+            Saving Session
+            <small className='text-sm mt-2 text-white/60'>Please wait</small>
+          </h3>
+        </div>
       )}
 
 

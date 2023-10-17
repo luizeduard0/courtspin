@@ -10,20 +10,20 @@ export default function ModalityStep({ wizardState, onChange, onPrev, onNext }: 
             <Block
               state={wizardState}
               title='Individual'
-              description='Just getting started'
               name='modality'
               value='INDIVIDUAL'
               onChange={onChange}
+              style={{ backgroundImage: `url('static/imgs/singles.jpg')`, backgroundSize: 'cover' }}
             />
           </div>
           <div className='flex gap-2 h-full'>
             <Block
               state={wizardState}
               title='Group'
-              description='Just getting started'
               name='modality'
               value='GROUP'
               onChange={onChange}
+              style={{ backgroundImage: `url('static/imgs/group.jpg')`, backgroundSize: 'cover' }}
             />
           </div>
         </>
@@ -33,20 +33,20 @@ export default function ModalityStep({ wizardState, onChange, onPrev, onNext }: 
             <Block
               state={wizardState}
               title='Singles'
-              description='Just getting started'
               name='modality'
               value='SINGLES'
               onChange={onChange}
+              style={{ backgroundImage: `url('static/imgs/singles.jpg')`, backgroundSize: 'cover' }}
             />
           </div>
           <div className='flex gap-2 h-full'>
             <Block
               state={wizardState}
               title='Doubles'
-              description='Just getting started'
               name='modality'
               value='DOUBLES'
               onChange={onChange}
+              style={{ backgroundImage: `url('static/imgs/doubles.jpg')`, backgroundSize: 'cover' }}
             />
           </div>
         </>

@@ -20,6 +20,7 @@ export default function PeriodStep({ wizardState, onChange, onPrev, onNext }: Wi
               end: dayjs().toISOString()
             })
           }}
+          className='bg-blue-300'
         />
         <Block
           state={wizardState}
@@ -32,6 +33,7 @@ export default function PeriodStep({ wizardState, onChange, onPrev, onNext }: Wi
               end: dayjs().add(1,'day').toISOString()
             })
           }}
+          className='bg-blue-200'
         />
       </div>
       <div className='flex gap-2 h-full'>
@@ -46,6 +48,7 @@ export default function PeriodStep({ wizardState, onChange, onPrev, onNext }: Wi
               end: dayjs().endOf('week').toISOString()
             })
           }}
+          className='bg-blue-100'
         />
         <Block
           state={wizardState}
@@ -58,6 +61,7 @@ export default function PeriodStep({ wizardState, onChange, onPrev, onNext }: Wi
               end: dayjs().weekday(7).toISOString()
             })
           }}
+          className='bg-blue-50'
         />
       </div>
 
