@@ -5,6 +5,7 @@ import { loginSuccess } from "@/redux/auth/action-reducer";
 import { getUser } from "@/utils/local-storage.service";
 import { useEffect } from "react";
 import Link from "next/link";
+import { Bell, TennisBall } from "@phosphor-icons/react";
 
 export default function Header() {
   const { user } = useSelector((state: StateType) => state.auth)
@@ -21,9 +22,12 @@ export default function Header() {
 
   return (
     <div className='flex justify-between pt-6 pl-4 pr-4 pb-2 border-b b-slate-300'>
-      <span className='text-lg font-medium'>CourtSpin</span>
-      <Link href={user?.id ? '/profile/me' : '/auth'}>
-        <Avatar avatar={user?.avatar || undefined} w={24} h={24} />
+      <span className='flex items-center gap-0.5 text-lg font-medium'>
+        <TennisBall className='text-green-500' weight="duotone" size={24} />
+        CourtSpin
+      </span>
+      <Link href={'/notifications'}>
+        <Bell size={20} weight='duotone' className='mt-1' />
       </Link>
     </div>
   )
