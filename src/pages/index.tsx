@@ -1,5 +1,5 @@
+import InboxPage from "./inbox";
+
 export default function Home() {
-    return (
-        <>Home</>
-    )
+    return <InboxPage />
 }

@@ -4,8 +4,8 @@ import dayjs from "dayjs";
 
 export default function CardHeader({ children, ...card }: CardHeaderProps) {
   
-  const start = dayjs(card.start).format('MMM DD, YY')
-  const end = dayjs(card.end).format('MMM DD, YY')
+const start = dayjs(card.start).format('MMM DD')
+const end = dayjs(card.end).format('MMM DD')
 
   if (children) return children
 
@@ -19,7 +19,7 @@ export default function CardHeader({ children, ...card }: CardHeaderProps) {
         </span>
         <span className='flex text-gray-500 text-sm leading-none py-0.5'>
           <Calendar weight='duotone' />
-            {start == end ? start : `${start} &bull ${end}`}
+            {start == end ? start : `${start} - ${end}`}
         </span>
       </div>
     </div>

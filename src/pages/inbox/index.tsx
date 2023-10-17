@@ -3,23 +3,21 @@ import { Card } from "@/components/common/card"
 import FeedCard from "@/components/feed/card"
 import { requestInbox } from "@/redux/inbox/action-reducer"
 import { StateType } from "@/types/state.type"
-import { useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import { useDispatch, useSelector } from "react-redux"
 
 export default function InboxPage() {
   const dispatch = useDispatch()
   const { isLoading, sessions } = useSelector((state: StateType) => state.inbox)
-
-  const loadInbox = () => {
-    dispatch(requestInbox())
-  }
+  const [shouldLoad, setShouldLoad] = useState<boolean>(true)
 
   useEffect(() => {
-    if (!sessions.length) {
-      loadInbox()
-    }
-  }, [sessions])
+    if (!shouldLoad) return
+
+    dispatch(requestInbox())
+    setShouldLoad(false)
+  }, [shouldLoad, setShouldLoad, dispatch])
 
   if (isLoading && !sessions.length) {
     return (

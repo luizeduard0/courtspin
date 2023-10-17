@@ -1,8 +1,10 @@
 import Avatar from "@/components/common/avatar";
+import FeedCard from "@/components/feed/card";
+import { Session } from "@/models/session";
 import { User } from "@/models/user";
 import ApiService from "@/utils/api.service";
 import { getUser } from "@/utils/local-storage.service";
-import { ArchiveBox, Clock, DoorOpen, TennisBall } from "@phosphor-icons/react";
+import { ArchiveBox, DoorOpen, TennisBall } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -12,11 +14,13 @@ export default function Profile() {
   const router = useRouter()
   const { id } = router.query
   const [profile, setProfile] = useState<User | undefined>()
+  const [sessions, setSessions] = useState<Session[] | undefined>()
 
   const loadUser = async (id: string) => {
     try {
-      const userProfile = await ApiService.callGet(`/user/profile/${id}`, {})
-      setProfile(userProfile as any)
+      const response: any = await ApiService.callGet(`/user/profile/${id}`, {})
+      setProfile(response.user as User)
+      setSessions(response.sessions as Session[])
     } catch (e) {
 
     }
@@ -25,7 +29,7 @@ export default function Profile() {
   useEffect(() => {
     if (!id) return
 
-    if(id === 'me') {
+    if (id === 'me') {
       const user = getUser()
       setProfile(user)
     }
@@ -44,6 +48,7 @@ export default function Profile() {
           </small>
         </h2>
       </div>
+
       {id == 'me' && (
         <ul className='pt-10'>
           <li className='border-b border-gray-200 px-5 py-4'>
@@ -52,13 +57,7 @@ export default function Profile() {
               My Requests
             </Link>
           </li>
-          <li className='border-b border-gray-200 px-5 py-4'>
-            <Link href='/sessions' className='flex gap-3 items-center'>
-              <TennisBall weight='duotone' className='text-gray-500' size={20} />
-              Sessions
-            </Link>
-          </li>
-          <li className='border-b border-gray-200 px-5 py-4'>
+          <li className=' px-5 py-4'>
             <Link href='/auth/logout' className='flex gap-3 items-center'>
               <DoorOpen weight='duotone' className='text-gray-500' size={20} />
               Logout
@@ -66,6 +65,20 @@ export default function Profile() {
           </li>
         </ul>
       )}
+
+      <section className='py-5 px-3 mt-5'>
+        <h2 className='text-xl'>{sessions ? 'Sessions' : <Skeleton />}</h2>
+        {sessions && (
+          <>
+            {sessions.map((session, index) => (
+              <FeedCard
+                key={index}
+                session={session}
+              />
+            ))}
+          </>
+        )}
+      </section>
     </div>
   )
 }

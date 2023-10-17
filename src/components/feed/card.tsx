@@ -1,4 +1,4 @@
-import { Session, SessionUser } from "@/models/session";
+import { SessionUser } from "@/models/session";
 import { getUsersByModality } from "@/utils/common";
 import { MODALITY } from "@/utils/constants";
 import { Plus } from "@phosphor-icons/react";
@@ -60,7 +60,7 @@ export default function FeedCard({ session, className = undefined }: FeedCardPro
             >
               <Avatar
                 user={sessionUser.user}
-                w={'100%'} h={96}
+                w={'96px'} h={'96px'}
                 className='bg-gray-200 rounded-lg'
               />
               <h3 className='leading-none mt-1'>{sessionUser.user.firstName}</h3>

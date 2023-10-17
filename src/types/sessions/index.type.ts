@@ -7,4 +7,5 @@ export declare type InitialSessionState = {
   draft: InitialWizardState | {},
   selectedSession: Session | undefined
   sessions: Session[] | []
+  requests: Session[] | []
 }

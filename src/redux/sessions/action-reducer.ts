@@ -9,12 +9,21 @@ const initialState = {
   draft: {},
   sessions: [],
   selectedSession: {},
+  requests: []
 } as InitialSessionState;
 
 const sessionSlice = createSlice({
   name: "sessions",
   initialState,
   reducers: {
+    updateSessionState: (state, { payload: session }: PayloadAction<Session | undefined>) => {
+      return {
+        ...state,
+        error: null,
+        selectedSession: session,
+        isLoading: true,
+      };
+    },
     loadSessionRequest: (state, { payload }: PayloadAction<string>) => {
       return {
         ...state,
@@ -114,10 +123,41 @@ const sessionSlice = createSlice({
         error,
       };
     },
+    requestRequests: (
+      state
+    ) => {
+      return {
+        ...state,
+        isLoading: true,
+        error: undefined,
+      };
+    },
+    requestRequestsSuccess: (
+      state,
+      { payload: requests }: PayloadAction<Session[]>
+    ) => {
+      return {
+        ...state,
+        requests: requests,
+        isLoading: false,
+        error: undefined,
+      };
+    },
+    requestRequestsError: (
+      state,
+      { payload: error }: PayloadAction<any>
+    ) => {
+      return {
+        ...state,
+        isLoading: false,
+        error,
+      };
+    },
   },
 });
 
 export const {
+  updateSessionState,
   loadSessionRequest,
   loadSessionSuccess,
   loadSessionError,
@@ -128,6 +168,9 @@ export const {
   requestJoinSession,
   requestJoinSessionSuccess,
   requestJoinSessionError,
+  requestRequests,
+  requestRequestsSuccess,
+  requestRequestsError,
 } = sessionSlice.actions;
 
 export default sessionSlice.reducer;

@@ -1,4 +1,5 @@
 import { PersonType } from "./person-type";
+import { SessionUser } from "./session";
 
 export interface User {
   id: string;
@@ -11,4 +12,5 @@ export interface User {
   avatar?: string;
   location: string;
   token?: string;
+  sessionUser?: SessionUser[]
 }

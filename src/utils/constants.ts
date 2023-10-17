@@ -1,4 +1,4 @@
-export const PROTECTED_ROUTES = ['/play'];
+export const PROTECTED_ROUTES = ['/play', '/profile/me'];
 
 export declare type TYPE = 'MATCH' | 'PRACTICE' | 'LEARN'
 export declare type PLAYER_TYPE = 'COACH' | 'PROFESSOR' | 'PLAYER' | 'VIEWER' | 'CHAIR_UMPIRE' | 'LINE_UMPIRE'

@@ -1,21 +1,28 @@
-import { User } from "@/models/user"
+/* eslint-disable @next/next/no-img-element */
 import { UserCircle } from "@phosphor-icons/react"
-import Image from "next/image"
 
-export default function Avatar({ user, w = 8, h = 8, className='rounded-full' }: { user?: any | null, w?: number | string, h?: number | string, className?: string }) {
+export default function Avatar({ user, w = 8, h = 8, className = 'rounded-full' }: { user?: any | null, w?: number | string, h?: number | string, className?: string }) {
   if (user && user.avatar) {
     return (
-      <Image
-        src={user.avatar}
-        width={w}
-        height={h}
-        className={className}
+      <div
+        className='bg-gray-100 rounded-full'
         style={{
-          width: `${w}px`,
-          height: `${h}px`,
+          maxWidth: `${w}`,
+          height: `${h}`,
         }}
-        alt='avatar'
-      />
+      >
+        <img
+          src={user.avatar}
+          width={w}
+          height={h}
+          className={className}
+          style={{
+            maxWidth: `${w}`,
+            height: `${h}`,
+          }}
+          alt='avatar'
+        />
+      </div>
     )
   }
 

@@ -17,12 +17,12 @@ export default function Nav() {
       icon: <TennisBall size={20} weight='duotone' />
     },
     {
-      label: 'Sessions',
+      label: 'Requests',
       url: '/sessions',
       icon: <CalendarCheck size={20} weight='duotone' />
     },
     {
-      label: 'Profile',
+      label: 'Me',
       url: '/profile/me',
       urlMatch: '/profile/[id]',
       icon: <UserCircle size={20} weight='duotone' />

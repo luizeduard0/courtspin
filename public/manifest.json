@@ -1,0 +1,8 @@
+{
+  "name": "CourtSpin",
+  "short_name": "CourtSpin",
+  "start_url": "/inbox",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "Play Tennis. Today."
+}

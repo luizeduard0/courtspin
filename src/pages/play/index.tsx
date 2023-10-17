@@ -13,6 +13,7 @@ import { requestSession, updateSessionDraftState } from "@/redux/sessions/action
 import PeriodStep from "./period"
 import { useRouter } from "next/router"
 import { Spinner } from "@phosphor-icons/react"
+import Link from "next/link"
 
 const steps = ['searching-for', 'modality', 'location', 'period', 'saving']
 
@@ -48,10 +49,6 @@ export default function PlayPage() {
     }
   }, [wizard.step])
 
-  useEffect(() => {
-    if (!selectedSession?.id) return
-    router.push(`/sessions/${selectedSession.id}`)
-  }, [selectedSession, router])
 
   const handleChange = (state: {}, shouldHandleNext: boolean = true) => {
     setWizard(prev => ({
@@ -179,9 +176,15 @@ export default function PlayPage() {
               text-2xl text-white mt-4 text-center
             `}
           >
-            <Spinner className='animate-spin' />
-            Saving Session
-            <small className='text-sm mt-2 text-white/60'>Please wait</small>
+            {!selectedSession ? (
+              <>
+                <Spinner className='animate-spin' />
+                Saving Session
+                <small className='text-sm mt-2 text-white/60'>Please wait</small>
+              </>
+            ) : (
+              <Link href={`/sessions/${selectedSession.id}`} className='bg-black px-4 py-2 rounded-full'>Go to session</Link>
+            )}
           </h3>
         </div>
       )}
