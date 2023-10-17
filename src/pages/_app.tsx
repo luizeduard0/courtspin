@@ -1,13 +1,13 @@
 import { AppProps } from "next/app";
 import { wrapper } from "@/redux/store";
 import { useRouter } from "next/router";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import { PROTECTED_ROUTES } from "@/utils/constants";
 import { useEffect } from "react";
 import '@/styles/globals.scss'
+import 'react-loading-skeleton/dist/skeleton.css'
 import Header from "@/components/common/header";
 import Nav from "@/components/common/nav";
-import { StateType } from "@/types/state.type";
 
 export default function App({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);

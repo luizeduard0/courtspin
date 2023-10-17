@@ -4,4 +4,6 @@ export declare type CardHeaderProps = {
   children?: ReactNode,
   title: string
   location: string
+  start: string
+  end: string
 }

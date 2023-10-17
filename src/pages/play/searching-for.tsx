@@ -12,6 +12,7 @@ export default function SearchingForStep({ wizardState, onChange, onNext, onPrev
           value='MATCH'
           state={wizardState}
           onChange={onChange}
+          style={{ backgroundImage: `url('static/imgs/match.jpg')`, backgroundSize: 'cover'}}
         />
       </div>
       <div className='flex gap-2' style={{ height: '40%' }}>
@@ -21,6 +22,7 @@ export default function SearchingForStep({ wizardState, onChange, onNext, onPrev
           value='PRACTICE'
           state={wizardState}
           onChange={onChange}
+          style={{ backgroundImage: `url('static/imgs/practice.jpg')`, backgroundSize: 'cover'}}
         />
         <Block
           title='Learn'
@@ -28,20 +30,8 @@ export default function SearchingForStep({ wizardState, onChange, onNext, onPrev
           value='LEARN'
           state={wizardState}
           onChange={onChange}
+          style={{ backgroundImage: `url('static/imgs/coach.jpg')`, backgroundSize: 'cover'}}
         />
-      </div>
-      <div className='flex gap-2 mt-2 pt-2 border-t border-gray-200'>
-        <button
-          onClick={onNext}
-          className={`
-          w-full
-          text-white px-1 py-2 rounded
-          ${wizardState.type !== undefined ? 'bg-blue-700' : 'bg-gray-300'}
-        `}
-          disabled={wizardState.type == undefined}
-        >
-          Next
-        </button>
       </div>
     </>
   )

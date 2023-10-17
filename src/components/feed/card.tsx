@@ -8,9 +8,11 @@ import { FeedCardProps } from "@/types/props-types/feed-card.type";
 import { useDispatch } from "react-redux";
 import { requestJoinSession } from "@/redux/sessions/action-reducer";
 import { getUser } from "@/utils/local-storage.service";
+import { useRouter } from "next/router";
 
 export default function FeedCard({ session, className = undefined }: FeedCardProps) {
   const dispatch = useDispatch()
+  const router = useRouter()
   const user = getUser()
 
   const handleJoin = () => {
@@ -46,19 +48,24 @@ export default function FeedCard({ session, className = undefined }: FeedCardPro
       <Card.header
         title={`${session.modality} ${session.sessionType}`}
         location={session.location}
+        start={session.start}
+        end={session.end}
       />
       <Card.body>
-        <div className='flex justify-between'>
+        <div className='flex gap-3 justify-between'>
           {session?.sessionUser?.map((sessionUser, index) => (
-            <div key={index}>
+            <button 
+              onClick={() => router.push(`/profile/${sessionUser.user.id}`)}
+              className='text-left' key={index}
+            >
               <Avatar
-                avatar={sessionUser.user.avatar}
-                w={96} h={96}
+                user={sessionUser.user}
+                w={'100%'} h={96}
                 className='bg-gray-200 rounded-lg'
               />
               <h3 className='leading-none mt-1'>{sessionUser.user.firstName}</h3>
               <span className='leading-none text-sm text-gray-400'>NTRP {sessionUser.user.ntrp || '-'}</span>
-            </div>
+            </button>
           ))}
           {renderUserPlaceHolders((session?.sessionUser || []), session?.modality)}
         </div>

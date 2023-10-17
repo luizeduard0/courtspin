@@ -1,11 +1,12 @@
+import { User } from "@/models/user"
 import { UserCircle } from "@phosphor-icons/react"
 import Image from "next/image"
 
-export default function Avatar({ avatar = undefined, w = 8, h = 8, className='rounded-full' }: { avatar?: string | undefined, w?: number, h?: number, className?: string }) {
-  if (avatar) {
+export default function Avatar({ user, w = 8, h = 8, className='rounded-full' }: { user?: any | null, w?: number | string, h?: number | string, className?: string }) {
+  if (user && user.avatar) {
     return (
       <Image
-        src={avatar}
+        src={user.avatar}
         width={w}
         height={h}
         className={className}
@@ -20,7 +21,7 @@ export default function Avatar({ avatar = undefined, w = 8, h = 8, className='ro
 
   return (
     <div className={className}>
-      <UserCircle width={w} height={h} className='text-gray-300' />
+      <UserCircle width={w} height={h} className={user?.id ? 'text-blue-800' : 'text-gray-500'} weight="duotone" />
     </div>
   )
 }

@@ -9,6 +9,6 @@ export interface User {
   password: string;
   gender: string;
   avatar?: string;
-  zipcode: string;
+  location: string;
   token?: string;
 }
