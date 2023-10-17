@@ -2,10 +2,12 @@ import { combineReducers } from "redux";
 import { HYDRATE } from "next-redux-wrapper";
 import auth from "./auth/action-reducer";
 import sessions from "./sessions/action-reducer";
+import inbox from "./inbox/action-reducer";
 
 const combinedReducer = combineReducers({
   auth,
-  sessions
+  sessions,
+  inbox
 });
 
 const reducers = (state: any, action: any) => {

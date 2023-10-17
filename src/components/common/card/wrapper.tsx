@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export default function CardWrapper(
-  { children, className='flex flex-col gap-3 p-3 border border-slate-300 rounded shadow' }: 
+  { children, className='flex flex-col bg-white gap-4 p-4 border-t border-b border-slate-200' }: 
   { children: ReactNode, className?: string }
 ) {
   return (

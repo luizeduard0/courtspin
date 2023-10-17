@@ -20,7 +20,7 @@ export default function FeedCard({ session, className = undefined }: FeedCardPro
   const renderUserPlaceHolders = (users: SessionUser[], modality: MODALITY) => {
     const totalUsers = getUsersByModality(modality)
     const remainingUsers = totalUsers - users.length
-    const hasJoined = users.find(u => u.user.id == user.id)
+    const hasJoined = !user ? false : users.find(u => u.user.id == user.id)
 
     const output = []
     for (let i = 0; i < remainingUsers; i++) {
@@ -49,8 +49,8 @@ export default function FeedCard({ session, className = undefined }: FeedCardPro
       />
       <Card.body>
         <div className='flex justify-between'>
-          {session?.sessionUser?.map(sessionUser => (
-            <div key={sessionUser.user.id}>
+          {session?.sessionUser?.map((sessionUser, index) => (
+            <div key={index}>
               <Avatar
                 avatar={sessionUser.user.avatar}
                 w={96} h={96}

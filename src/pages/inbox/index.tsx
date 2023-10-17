@@ -1,75 +1,33 @@
 import Avatar from "@/components/common/avatar"
 import { Card } from "@/components/common/card"
+import FeedCard from "@/components/feed/card"
+import { requestInbox } from "@/redux/inbox/action-reducer"
+import { StateType } from "@/types/state.type"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function InboxPage() {
+  const dispatch = useDispatch()
+  const { sessions } = useSelector((state: StateType) => state.inbox)
 
-  const cards = [
-    {
-      type: 'practice',
-      modality: 'singles',
-      status: 'request',
-      title: 'Practice Request',
-      location: 'Belo Horizonte, MG',
-      people: [
-        {
-          id: '19128412',
-          name: 'Luiz Eduardo',
-          ntrp: 4.5
-        }
-      ]
-    },
-    {
-      type: 'match',
-      modality: 'singles',
-      status: 'active',
-      title: 'Match',
-      location: 'Belo Horizonte, MG',
-      people: [
-        {
-          id: '191232328412',
-          name: 'Pedro Pimenta',
-          ntrp: 3.5
-        },
-      ]
-    },
-    {
-      type: 'lesson',
-      modality: 'singles',
-      status: 'request',
-      title: 'Lesson Request',
-      location: 'Belo Horizonte, MG',
-      people: [
-        {
-          id: '2319128412',
-          name: 'Joana',
-          ntrp: 3.5
-        }
-      ]
-    },
-  ]
+  const loadInbox = () => {
+    dispatch(requestInbox())
+  }
+
+  useEffect(() => {
+    if(!sessions.length) {
+      loadInbox()
+    }
+  }, [sessions])
 
   return (
-    <div className='p-2'>
-      <div className='flex gap-2 flex-col'>
-        {cards.map((card, index) => (
-          <Card.wrapper key={index}>
-            <Card.header
-              title={card.title}
-              location={card.location}
-            />
-            <Card.body>
-              <div className='flex justify-between'>
-                {card.people.map(people => (
-                  <div key={people.id}>
-                    <div className='w-24 h-24 bg-gray-200 rounded'></div>
-                    <h3 className='leading-none mt-1'>{people.name}</h3>
-                    <span className='leading-none text-sm text-gray-400'>NTRP {people.ntrp || '-'}</span>
-                  </div>
-                ))}
-                
-              </div>
-            </Card.body>
-          </Card.wrapper>
+    <div className='bg-gray-50 h-screen'>
+      <div className='flex gap-1 flex-col'>
+        {sessions.map((session, index) => (
+          <FeedCard
+            key={index}
+            session={session}
+          />
         ))}
       </div>
     </div>

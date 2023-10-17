@@ -5,6 +5,7 @@ import { loadSessionError, loadSessionRequest, loadSessionSuccess, requestJoinSe
 import { all, fork, put, takeLatest } from "redux-saga/effects";
 import ApiService from "@/utils/api.service";
 import { Session } from "@/models/session";
+import { requestInbox } from "../inbox/action-reducer";
 
 function* loadSession({ payload: sessionId }: PayloadAction<Session>) {
   try {
@@ -22,6 +23,7 @@ function* addSession({ payload }: PayloadAction<InitialWizardState>) {
   try {
     const response: Session = yield ApiService.callPost('sessions', payload)
     yield put(requestSessionSuccess(response))
+    yield put(requestInbox())
   } catch (error: AxiosError | any) {
     yield put(requestSessionError(error?.response?.data) || {
       code: 400,
